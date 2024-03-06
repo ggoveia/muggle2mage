@@ -1,0 +1,22 @@
+{
+  "name": "muggle2mage",
+  "version": "0.0.0",
+  "scripts": {
+    "test": "jest"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.23.9",
+    "@babel/preset-env": "^7.23.9",
+    "@cloudflare/workers-types": "^4.20240222.0",
+    "@jest/globals": "^29.7.0",
+    "babel-jest": "^29.7.0",
+    "fetch-mock-jest": "^1.5.1",
+    "jest": "^29.7.0",
+    "wrangler": "3.29.0"
+  },
+  "private": true,
+  "dependencies": {
+    "node-fetch": "^3.3.2",
+    "toml": "^3.0.0"
+  }
+}

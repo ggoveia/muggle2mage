@@ -1,0 +1,28 @@
+name = "processor"
+type = "javascript"
+main = "src/EventListeners.js"
+
+account_id = "1644d64a41cd75e3993b6395c8740a21" # Use your Cloudflare Account ID here
+kv_namespaces = [
+   { binding = "m2mKV", id = "8f2d6c098e594d4faf77ef894392f3fe" }
+]
+
+[vars]
+SLACK_CHANNEL_ID = "CFMQ2JDPG"
+SLACK_BOT_TOKEN = "xoxb-530236100756-6687024120434-QustBIjMNXYauohPtwnNnh0M"
+SLACK_WEBHOOK_URL = "https://hooks.slack.com/services/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"
+OPENAI_API_KEY = "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"
+IS_LOCAL = "true"
+
+
+[triggers]
+crons = ["0 9 * * *"]
+
+[build]
+# Remove the "type" field as it is ignored
+# type = "javascript"
+
+# Remove the "compatibility_date" field as it is not recognized
+# compatibility_date = "2024-02-08"
+
+ compatibility_date = "2024-02-22"
