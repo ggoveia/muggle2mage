@@ -11,32 +11,37 @@ describe('evaluateAnswer in EvaluationService', () => {
   it('returns the evaluated text on a successful API call', async () => {
     // Mock the OpenAI API response
     const mockResponse = {
-      choices: [{
-        text: "This is a test evaluation."
-      }]
+      choices: [
+        {
+          text: "This is a test evaluation.",
+        },
+      ],
     };
-  
+
     // Use global.fetch mock to simulate the API response
-    global.fetch.mock(JSON.stringify(mockResponse), { status: 200 });
-  
+    global.fetch.mock(
+      'https://api.openai.com/v1/engines/davinci/completions',
+      JSON.stringify(mockResponse)
+    );
+
     const userMessage = "Test message";
     const result = await evaluateAnswer(userMessage);
-       
-    expect(global.fetch).toHaveBeenCalledWith(expect.anything(), expect.objectContaining({
+
+    expect(global.fetch).toHaveBeenCalledWith(
+      'https://api.openai.com/v1/engines/davinci/completions',
+      {
         method: "POST",
         headers: {
-          'Content-Type': 'application/json',
-          "Authorization": `Bearer ${process.env.OPENAI_API_KEY}`
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${process.env.OPENAI_API_KEY}`,
         },
-        // This line checks that the body, when parsed back into an object, has a property that contains the userMessage
-        body: expect.stringContaining(JSON.stringify(expect.objectContaining({
-          prompt: userMessage
-        })))
-      }));
-  
+        body: '{"prompt":"The user\'s answer is: \\"Test message\\". Evaluate the correctness and provide feedback.","max_tokens":150,"temperature":0.5,"top_p":1,"frequency_penalty":0,"presence_penalty":0,"stop":["\\n"]}',
+      }
+    );
+
     expect(result).toEqual("This is a test evaluation.");
   });
-  
+
 
   it('returns an error message on a failed API call', async () => {
     // Mock a failed API response
